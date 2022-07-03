@@ -367,14 +367,14 @@ namespace ScientificCalculator
                 textBox2.Text = "-";
                 textBox3.Text = "-";
             }
-            else if (!double.TryParse(textBox1.Text, out total)) 
+            else if (!double.TryParse(textBox1.Text, out total))
             {
                 textBox1.Text = "N/A";
                 total = double.NaN;
                 textBox2.Text = "-";
                 textBox3.Text = "-";
             }
-            else if(convertibleBinHex(total))
+            else if (convertibleBinHex(total))
             {
                 textBox2.Text = ((long)total).ToString("x");
                 textBox3.Text = Convert.ToString((long)total, 2);
@@ -391,7 +391,7 @@ namespace ScientificCalculator
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             updateFlag = true;
-            switch(e.KeyData)
+            switch (e.KeyData)
             {
                 case Keys.D0:
                     textBox1.Text += "0";
