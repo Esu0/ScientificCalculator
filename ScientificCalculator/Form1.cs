@@ -13,7 +13,25 @@ namespace ScientificCalculator
     public partial class Form1 : Form
     {
         public double total = 0;
-        private bool updateFlag = false;
+        private double num = 0;//直接変更しない
+
+        ///<summary>
+        ///ープロパティー
+        ///変数と同じようにアクセスできます
+        ///例：
+        ///double Left = 20.0, Right = 10.0;
+        ///InOutNumber = Right + Left;
+        ///
+        ///変数を書き換えると表示を勝手に更新してくれる仕様です。
+        ///(2進数、16進数欄も勝手に更新される)
+        ///</summary>
+
+        public double InOutNumber
+        {
+            get { return num; }
+            set { UpdateTotal(value); }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -30,10 +48,8 @@ namespace ScientificCalculator
         {
             if (enzanshi == null)   //一回目の入力の時
             {
-                valueLeft = double.Parse(textBox1.Text);    //内部変数に格納
-                textBox1.Text = ""; //テキストをいったん消去
-                textBox2.Text = "";
-                textBox3.Text = "";
+                valueLeft = InOutNumber;    //内部変数に格納
+                DeleteAll();
                 enzanshi = enzanshi1;   //入力された演算子を保持
             }
             else if (textBox1.Text == "") //２回目の入力
@@ -42,12 +58,10 @@ namespace ScientificCalculator
             }
             else if (textBox1.Text != "")   //数字が入力されてる場合
             {
-                valueRight = double.Parse(textBox1.Text);    //表示されている値を内部変数に格納
+                valueRight = InOutNumber;    //表示されている値を内部変数に格納
                 enzan2();   //もともとの演算子を適用
 
-                textBox1.Text = ""; //テキストをいったん消去
-                textBox2.Text = "";
-                textBox3.Text = "";
+                DeleteAll();
                 enzanshi = enzanshi1; //新しい演算子を適用
             }
         }
@@ -78,45 +92,33 @@ namespace ScientificCalculator
         private void jikkouButton_Click(object sender, EventArgs e)
         {
 
-            if (textBox1.Text == "")
-            {
-                valueRight = 0;
-            }
-            else
-            {
-                valueRight = double.Parse(textBox1.Text);    //2つめの値を内部変数に格納
-            }
+            valueRight = InOutNumber; //2つめの値を内部変数に格納
 
             //演算子の判定と計算を行う
             if (enzanshi == "+")
             {
-                total = valueLeft + valueRight;
+                InOutNumber = valueLeft + valueRight;
             }
             else if (enzanshi == "-")
             {
-                total = valueLeft - valueRight;
+                InOutNumber = valueLeft - valueRight;
             }
             else if (enzanshi == "*")
             {
-                total = valueLeft * valueRight;
+                InOutNumber = valueLeft * valueRight;
             }
             else if (enzanshi == "/")
             {
-                total = valueLeft / valueRight;
+                InOutNumber = valueLeft / valueRight;
             }
             else if (enzanshi == "one") //1変数関数の場合
             {
-
-                total = valueLeft;
+                InOutNumber = valueLeft;
             }
             else if (enzanshi == "x^y")
             {
-                total = Math.Pow(valueLeft, valueRight);
+                InOutNumber = Math.Pow(valueLeft, valueRight);
             }
-
-            textBox1.Text = total.ToString();  //結果の表示
-            updateText();   //進数変換
-
         }
 
 
@@ -267,149 +269,257 @@ namespace ScientificCalculator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "1";
-
+            InputDigit('1');
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "2";
-
+            InputDigit('2');
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "3";
-
+            InputDigit('3');
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "4";
-
+            InputDigit('4');
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "5";
-
+            InputDigit('5');
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "6";
-
+            InputDigit('6');
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "7";
-
+            InputDigit('7');
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "8";
-
+            InputDigit('8');
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "9";
-
+            InputDigit('9');
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "0";
-
+            InputDigit('0');
         }
 
         private bool convertibleBinHex(double x)
         {
-            return x - (long)x <= double.Epsilon;
+            return Math.Abs(x - (long)x) <= double.Epsilon;
         }
 
-        private void updateText()
+        //この関数は使わない
+        private void UpdateTotal(double value)
         {
-            if (textBox1.Text == "")
+            num = value;
+            textBox1.Text = num.ToString();
+            if (convertibleBinHex(value))
             {
-                total = 0;
-                textBox2.Text = "-";
-                textBox3.Text = "-";
-            }
-            else if (!double.TryParse(textBox1.Text, out total))
-            {
-                textBox1.Text = "N/A";
-                total = double.NaN;
-                textBox2.Text = "-";
-                textBox3.Text = "-";
-            }
-            else if (convertibleBinHex(total))
-            {
-                textBox2.Text = ((long)total).ToString("x");
-                textBox3.Text = Convert.ToString((long)total, 2);
+                textBox2.Text = ((long)num).ToString("x");
+                textBox3.Text = Convert.ToString((long)num, 2);
             }
             else
             {
                 textBox2.Text = "-";
                 textBox3.Text = "-";
             }
-            //textBox2.Text = total.ToString("x");
-            //textBox3.Text = Convert.ToString(total, 2);
         }
 
+        private void UpdateTotal(double value, string textOut)
+        {
+            num = value;
+            textBox1.Text = textOut;
+            if (convertibleBinHex(value))
+            {
+                textBox2.Text = ((long)num).ToString("x");
+                textBox3.Text = Convert.ToString((long)num, 2);
+            }
+            else
+            {
+                textBox2.Text = "-";
+                textBox3.Text = "-";
+            }
+        }
+
+        private void UpdateWithTail(double value, string tail)
+        {
+            num = value;
+            textBox1.Text = num.ToString() + tail;
+            if(convertibleBinHex(value))
+            {
+                textBox2.Text = ((long)num).ToString("x");
+                textBox3.Text = Convert.ToString((long)num, 2);
+            }
+            else
+            {
+                textBox2.Text = "-";
+                textBox3.Text = "-";
+            }
+        }
+        //数字一文字を入力
+        private void InputDigit(char digit)
+        {
+            textBox1.Text += digit;
+            if (double.TryParse(textBox1.Text, out double value)) 
+            {
+                InOutNumber = value;
+            }
+            else
+            {
+                InOutNumber = double.NaN;
+            }
+        }
+
+        //マイナス(符号)を入力
+        private void InputMinus()
+        {
+            if(textBox1.Text == "")
+            {
+                textBox1.Text = "-";
+                return;
+            }
+            else if (textBox1.Text.FirstOrDefault() == '-')
+            {
+                textBox1.Text = textBox1.Text.Remove(0, 1);
+            }
+            else
+            {
+                textBox1.Text = "-" + textBox1.Text;
+            }
+            if (textBox1.Text.LastOrDefault() != '.') 
+            {
+                if (double.TryParse(textBox1.Text, out double value))
+                {
+                    InOutNumber = value;
+                }
+                else
+                {
+                    InOutNumber = double.NaN;
+                }
+            }
+        }
+
+        //小数点を入力
+        private void InputDot()
+        {
+            if (textBox1.Text.LastIndexOf('.') == -1) 
+            {
+                textBox1.Text += ".";
+            }
+        }
+
+        //1文字消去
+        private void DeleteOne()
+        {
+            textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1, 1);
+            if (textBox1.Text == "-") UpdateTotal(0, "-");
+            if (textBox1.Text == "") InOutNumber = 0;
+            else if (textBox1.Text.LastOrDefault() != '.')
+            {
+                if (double.TryParse(textBox1.Text, out double value))
+                {
+                    InOutNumber = value;
+                }
+                else
+                {
+                    InOutNumber = double.NaN;
+                }
+            }
+            else
+            {
+                if (double.TryParse(textBox1.Text.Remove(textBox1.Text.Length - 1), out double value))
+                {
+                    UpdateWithTail(value, ".");
+                }
+                else
+                {
+                    InOutNumber = double.NaN;
+                }
+            }
+        }
+
+        //全消去
+        private void DeleteAll()
+        {
+            textBox1.Text = "";
+            InOutNumber = 0;
+        }
+
+        //押されたキー判定と入力された数字を保存
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            updateFlag = true;
+            char add_char;
             switch (e.KeyData)
             {
                 case Keys.D0:
-                    textBox1.Text += "0";
+                    add_char = '0';
                     break;
                 case Keys.D1:
-                    textBox1.Text += "1";
+                    add_char = '1';
                     break;
                 case Keys.D2:
-                    textBox1.Text += "2";
+                    add_char = '2';
                     break;
                 case Keys.D3:
-                    textBox1.Text += "3";
+                    add_char = '3';
                     break;
                 case Keys.D4:
-                    textBox1.Text += "4";
+                    add_char = '4';
                     break;
                 case Keys.D5:
-                    textBox1.Text += "5";
+                    add_char = '5';
                     break;
                 case Keys.D6:
-                    textBox1.Text += "6";
+                    add_char = '6';
                     break;
                 case Keys.D7:
-                    textBox1.Text += "7";
+                    add_char = '7';
                     break;
                 case Keys.D8:
-                    textBox1.Text += "8";
+                    add_char = '8';
                     break;
                 case Keys.D9:
-                    textBox1.Text += "9";
+                    add_char = '9';
                     break;
                 case Keys.Back:
-                    textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
+                    add_char = 'r';
                     break;
                 case Keys.Decimal:
-                    if (textBox1.Text.IndexOf(".") == -1)
-                        textBox1.Text += ".";
-                    updateFlag = false;
+                    add_char = '.';
                     break;
                 case Keys.Delete:
-                    textBox1.Text = "";
+                    add_char = 'd';
                     break;
                 default:
-                    updateFlag = false;
+                    add_char = '\0';
                     break;
             }
-            if (updateFlag) updateText();
+            if (add_char == 'r') DeleteOne();
+            else if (add_char == 'd') DeleteAll();
+            else if (add_char != '\0')
+            {
+                InputDigit(add_char);
+            }
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.') InputDot();
+            else if (e.KeyChar == '-') InputMinus();
         }
     }
 }
