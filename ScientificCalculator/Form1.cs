@@ -20,33 +20,74 @@ namespace ScientificCalculator
         }
 
         string enzanshi;   //演算子記憶用の変数
-        double valueLeft = 0;   //演算子の左側の数字
-        double valueRight = 0;  //演算子の右側の数字
-        double keta = 0;
-        double[] s = new double[100];   //入力を入れる配列
-        int cnt = 0;    //配列の何番目かカウント用変数
+        string enzanshi1;
+        double valueLeft = 0;   //演算子の左側の数字==内部変数1
+        double valueRight = 0;  //演算子の右側の数字==内部変数2
+        double angle;   //ラジアンの値を格納する変数
 
 
-        //public static double Sin (double a);
+        private void enzanshinyuuryoku()    //演算子の入力がどのようなものか判定
+        {
+            if (enzanshi == null)   //一回目の入力の時
+            {
+                valueLeft = double.Parse(textBox1.Text);    //内部変数に格納
+                textBox1.Text = ""; //テキストをいったん消去
+                textBox2.Text = "";
+                textBox3.Text = "";
+                enzanshi = enzanshi1;   //入力された演算子を保持
+            }
+            else if (textBox1.Text == "") //２回目の入力
+            {
+                enzanshi = enzanshi1;   //演算子のみ更新
+            }
+            else if (textBox1.Text != "")   //数字が入力されてる場合
+            {
+                valueRight = double.Parse(textBox1.Text);    //表示されている値を内部変数に格納
+                enzan2();   //もともとの演算子を適用
 
+                textBox1.Text = ""; //テキストをいったん消去
+                textBox2.Text = "";
+                textBox3.Text = "";
+                enzanshi = enzanshi1; //新しい演算子を適用
+            }
+        }
+        private void enzan2()   //演算子二回目以降の入力の時
+        {
+            //もともとの演算を適用
+            if (enzanshi == "+")
+            {
+                valueLeft = valueLeft + valueRight;
+            }
+            else if (enzanshi == "-")
+            {
+                valueLeft = valueLeft - valueRight;
+            }
+            else if (enzanshi == "*")
+            {
+                valueLeft = valueLeft * valueRight;
+            }
+            else if (enzanshi == "/")
+            {
+                valueLeft = valueLeft / valueRight;
+            }
+            else if (enzanshi == "x^y")
+            {
+                valueLeft = Math.Pow(valueLeft, valueRight);
+            }
+        }
         private void jikkouButton_Click(object sender, EventArgs e)
         {
 
-            int k = 0;  //配列の要素が小さいほうが桁が大きい
-            //入力された値を直す
-            valueRight = 0;
-            for (int i = cnt - 1; i >= 0; i--)
+            if (textBox1.Text == "")
             {
-                keta = Math.Pow(10, k);   //何桁目にするか(10^kを計算)
-                valueRight = valueRight + (s[i] * keta);   //入力された値を正しく戻して代入
-                k++;
-
+                valueRight = 0;
+            }
+            else
+            {
+                valueRight = double.Parse(textBox1.Text);    //2つめの値を内部変数に格納
             }
 
-            cnt = 0;
-
-
-            //演算子の判定
+            //演算子の判定と計算を行う
             if (enzanshi == "+")
             {
                 total = valueLeft + valueRight;
@@ -63,88 +104,37 @@ namespace ScientificCalculator
             {
                 total = valueLeft / valueRight;
             }
-            else if (enzanshi == "sin")
+            else if (enzanshi == "one") //1変数関数の場合
             {
-                //total = valueLeft sin valueRight;
+
+                total = valueLeft;
+            }
+            else if (enzanshi == "x^y")
+            {
+                total = Math.Pow(valueLeft, valueRight);
             }
 
-
-            textBox1.Text += "=";
-            textBox1.Text += total.ToString();
-
+            textBox1.Text = total.ToString();  //結果の表示
+            updateText();   //進数変換
 
         }
 
 
-
+        /*演算子のボタンを押したとき*/
         private void button14_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "*";
-            enzanshi = "*";
 
-            int k = 0;
-
-            if (valueLeft == 0)
-            {
-                for (int i = cnt - 1; i >= 0; i--)
-                {
-                    keta = Math.Pow(10, k);   //何桁目にするか(10^iを計算)
-                    valueLeft = valueLeft + (s[i] * keta);   //入力された値を正しく戻して代入
-                    k++;
-
-                }
-                cnt = 0;
-            }
-            else //2回目以降
-            {
-                valueRight = 0;
-                for (int i = cnt - 1; i >= 0; i--)
-                {
-                    keta = Math.Pow(10, k);   //何桁目にするか(10^iを計算)
-                    valueRight = valueRight + (s[i] * keta);   //入力された値を正しく戻して代入
-                    k++;
-
-                }
-
-                cnt = 0;
-                valueLeft = valueLeft + valueRight;
-
-            }
+            enzanshi1 = "*";    //入力された演算子を格納
+            enzanshinyuuryoku();    //演算子の入力がどのようなものか判定
 
         }
 
         private void plusButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += '+';
-            enzanshi = "+";
-            int k = 0;
 
-            if (valueLeft == 0)
-            {
-                for (int i = cnt - 1; i >= 0; i--)
-                {
-                    keta = Math.Pow(10, k);   //何桁目にするか(10^iを計算)
-                    valueLeft = valueLeft + (s[i] * keta);   //入力された値を正しく戻して代入
-                    k++;
+            enzanshi1 = "+";
+            enzanshinyuuryoku();
 
-                }
-                cnt = 0;
-            }
-            else //2回目以降
-            {
-                valueRight = 0;
-                for (int i = cnt - 1; i >= 0; i--)
-                {
-                    keta = Math.Pow(10, k);   //何桁目にするか(10^iを計算)
-                    valueRight = valueRight + (s[i] * keta);   //入力された値を正しく戻して代入
-                    k++;
-
-                }
-
-                cnt = 0;
-                valueLeft = valueLeft + valueRight;
-
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -154,204 +144,185 @@ namespace ScientificCalculator
 
         private void minusButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "-";
-            enzanshi = "-";
 
-            int k = 0;
-
-            if (valueLeft == 0)
-            {
-                for (int i = cnt - 1; i >= 0; i--)
-                {
-                    keta = Math.Pow(10, k);   //何桁目にするか(10^iを計算)
-                    valueLeft = valueLeft + (s[i] * keta);   //入力された値を正しく戻して代入
-                    k++;
-
-                }
-                cnt = 0;
-            }
-            else //2回目以降
-            {
-                valueRight = 0;
-                for (int i = cnt - 1; i >= 0; i--)
-                {
-                    keta = Math.Pow(10, k);   //何桁目にするか(10^iを計算)
-                    valueRight = valueRight + (s[i] * keta);   //入力された値を正しく戻して代入
-                    k++;
-
-                }
-
-                cnt = 0;
-                valueLeft = valueLeft + valueRight;
-
-            }
+            enzanshi1 = "-";
+            enzanshinyuuryoku();
 
         }
 
         private void divideButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "/";
-            enzanshi = "/";
 
-            int k = 0;
-
-            if (valueLeft == 0)
-            {
-                for (int i = cnt - 1; i >= 0; i--)
-                {
-                    keta = Math.Pow(10, k);   //何桁目にするか(10^iを計算)
-                    valueLeft = valueLeft + (s[i] * keta);   //入力された値を正しく戻して代入
-                    k++;
-
-                }
-                cnt = 0;
-            }
-            else //2回目以降
-            {
-                valueRight = 0;
-                for (int i = cnt - 1; i >= 0; i--)
-                {
-                    keta = Math.Pow(10, k);   //何桁目にするか(10^iを計算)
-                    valueRight = valueRight + (s[i] * keta);   //入力された値を正しく戻して代入
-                    k++;
-
-                }
-
-                cnt = 0;
-                valueLeft = valueLeft + valueRight;
-
-            }
+            enzanshi1 = "/";
+            enzanshinyuuryoku();
         }
 
         private void sinButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "sin";
-            enzanshi = "sin";
+            enzanshi1 = "one";
+            enzanshinyuuryoku();
+
+            //入力されてる値に演算を適用する
+            angle = Math.PI * valueLeft / 180;  //ラジアンに直す
+            valueLeft = Math.Sin(angle);
+            textBox1.Text = valueLeft.ToString();
         }
 
         private void cosButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "cos";
-            enzanshi = "cos";
+            enzanshi1 = "one";
+            enzanshinyuuryoku();
+
+            //入力されてる値に演算を適用する
+            angle = Math.PI * valueLeft / 180;  //ラジアンに直す
+            valueLeft = Math.Cos(angle);
+            textBox1.Text = valueLeft.ToString();
         }
 
         private void tanButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "tan";
-            enzanshi = "tan";
+            enzanshi1 = "one";
+            enzanshinyuuryoku();
+
+            //入力されてる値に演算を適用する
+            angle = Math.PI * valueLeft / 180;  //ラジアンに直す
+            valueLeft = Math.Tan(angle);
+            textBox1.Text = valueLeft.ToString();
         }
 
         private void logButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "log";
-            enzanshi = "log";
+            enzanshi1 = "one";
+            enzanshinyuuryoku();
+
+            //入力されてる値に演算を適用する
+            valueLeft = Math.Log10(valueLeft);  //入力値の常用対数(底10)を計算
+            textBox1.Text = valueLeft.ToString();
         }
 
         private void arcsinButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "arcsin";
-            enzanshi = "arcsin";
+            enzanshi1 = "one";
+            enzanshinyuuryoku();
+
+            //入力されてる値に演算を適用する
+            angle = Math.Asin(valueLeft);
+            valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
+            textBox1.Text = valueLeft.ToString();
         }
 
         private void arccosButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "arccos";
-            enzanshi = "arccos";
+            enzanshi1 = "one";
+            enzanshinyuuryoku();
+
+            //入力されてる値に演算を適用する
+            angle = Math.Acos(valueLeft);
+            valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
+            textBox1.Text = valueLeft.ToString();
         }
 
         private void arctanButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "arctan";
-            enzanshi = "arctan";
+            enzanshi1 = "one";
+            enzanshinyuuryoku();
+
+            //入力されてる値に演算を適用する
+            angle = Math.Atan(valueLeft);
+            valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
+            textBox1.Text = valueLeft.ToString();
         }
 
         private void expButton_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "exp";
-            enzanshi = "exp";
+
+            enzanshi1 = "one";
+            enzanshinyuuryoku();
+
+            //入力されてる値に演算を適用する
+            valueLeft = Math.Exp(valueLeft);  //入力値の常用対数(底10)を計算
+            textBox1.Text = valueLeft.ToString();
         }
 
         private void powButton1_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "x^2";
-            enzanshi = "x^2";
+
+            enzanshi1 = "one";
+            enzanshinyuuryoku();
+
+            //入力されてる値に演算を適用する
+            valueLeft = Math.Pow(valueLeft, 2);  //入力値の常用対数(底10)を計算
+            textBox1.Text = valueLeft.ToString();
         }
 
+        /*数字のボタンを押したとき*/
         private void powButton2_Click(object sender, EventArgs e)
         {
-            textBox1.Text += "x^y";
-            enzanshi = "x^y";
+
+            enzanshi1 = "x^y";
+            enzanshinyuuryoku();
+
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
             textBox1.Text += "1";
-            s[cnt] = 1;
-            cnt++;
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             textBox1.Text += "2";
-            s[cnt] = 2;
-            cnt++;
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             textBox1.Text += "3";
-            s[cnt] = 3;
-            cnt++;
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             textBox1.Text += "4";
-            s[cnt] = 4;
-            cnt++;
+
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             textBox1.Text += "5";
-            s[cnt] = 5;
-            cnt++;
+
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             textBox1.Text += "6";
-            s[cnt] = 6;
-            cnt++;
+
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             textBox1.Text += "7";
-            s[cnt] = 7;
-            cnt++;
+
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             textBox1.Text += "8";
-            s[cnt] = 8;
-            cnt++;
+
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             textBox1.Text += "9";
-            s[cnt] = 9;
-            cnt++;
+
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
             textBox1.Text += "0";
-            s[cnt] = 0;
-            cnt++;
+
         }
 
         private bool convertibleBinHex(double x)
