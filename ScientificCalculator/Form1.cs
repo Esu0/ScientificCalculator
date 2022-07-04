@@ -12,6 +12,9 @@ namespace ScientificCalculator
 {
     public partial class Form1 : Form
     {
+        delegate double OneValFunc(double val);
+        delegate double TwoValFunc(double val1, double val2);
+
         public double total = 0;
         private double num = 0;//直接変更しない
 
@@ -37,88 +40,56 @@ namespace ScientificCalculator
             InitializeComponent();
         }
 
-        string enzanshi;   //演算子記憶用の変数
-        string enzanshi1;
+
+        string enzanshi1;   //演算子記憶用の変数
         double valueLeft = 0;   //演算子の左側の数字==内部変数1
         double valueRight = 0;  //演算子の右側の数字==内部変数2
         double angle;   //ラジアンの値を格納する変数
 
+        TwoValFunc Operate = Operations.Noop;
+        bool OperatorSettingFlag = true;
 
         private void enzanshinyuuryoku()    //演算子の入力がどのようなものか判定
         {
-            if (enzanshi == null)   //一回目の入力の時
+            if (Operate == Operations.Noop)   //一回目の入力の時
             {
                 valueLeft = InOutNumber;    //内部変数に格納
                 DeleteAll();
-                enzanshi = enzanshi1;   //入力された演算子を保持
+                Operate = SelectOperator(enzanshi1);//入力された演算子を保持
+                OperatorSettingFlag = true;
             }
-            else if (textBox1.Text == "") //２回目の入力
+            else if (InOutNumber <= double.Epsilon) //２回目の入力
             {
-                enzanshi = enzanshi1;   //演算子のみ更新
+                Operate = SelectOperator(enzanshi1);//演算子のみ更新
+                OperatorSettingFlag = true;
             }
-            else if (textBox1.Text != "")   //数字が入力されてる場合
+            else   //数字が入力されてる場合
             {
-                valueRight = InOutNumber;    //表示されている値を内部変数に格納
-                enzan2();   //もともとの演算子を適用
+                if (OperatorSettingFlag)
+                {
+                    valueRight = InOutNumber;    //表示されている値を内部変数に格納
+                    enzan2();   //もともとの演算子を適用
+                }
 
                 DeleteAll();
-                enzanshi = enzanshi1; //新しい演算子を適用
+                OperatorSettingFlag = true;
+                Operate = SelectOperator(enzanshi1);//新しい演算子を適用
             }
         }
         private void enzan2()   //演算子二回目以降の入力の時
         {
             //もともとの演算を適用
-            if (enzanshi == "+")
-            {
-                valueLeft = valueLeft + valueRight;
-            }
-            else if (enzanshi == "-")
-            {
-                valueLeft = valueLeft - valueRight;
-            }
-            else if (enzanshi == "*")
-            {
-                valueLeft = valueLeft * valueRight;
-            }
-            else if (enzanshi == "/")
-            {
-                valueLeft = valueLeft / valueRight;
-            }
-            else if (enzanshi == "x^y")
-            {
-                valueLeft = Math.Pow(valueLeft, valueRight);
-            }
+            InOutNumber = Operate(valueLeft, valueRight);
+            valueLeft = InOutNumber;
         }
         private void jikkouButton_Click(object sender, EventArgs e)
         {
-
-            valueRight = InOutNumber; //2つめの値を内部変数に格納
+            if(OperatorSettingFlag)valueRight = InOutNumber; //2つめの値を内部変数に格納
+            OperatorSettingFlag = false;
 
             //演算子の判定と計算を行う
-            if (enzanshi == "+")
-            {
-                InOutNumber = valueLeft + valueRight;
-            }
-            else if (enzanshi == "-")
-            {
-                InOutNumber = valueLeft - valueRight;
-            }
-            else if (enzanshi == "*")
-            {
-                InOutNumber = valueLeft * valueRight;
-            }
-            else if (enzanshi == "/")
-            {
-                InOutNumber = valueLeft / valueRight;
-            }
-            else if (enzanshi == "one") //1変数関数の場合
-            {
-                InOutNumber = valueLeft;
-            }
-            else if (enzanshi == "x^y")
-            {
-                InOutNumber = Math.Pow(valueLeft, valueRight);
-            }
+            InOutNumber = Operate(valueLeft, valueRight);
+            valueLeft = InOutNumber;
         }
 
 
@@ -266,6 +237,15 @@ namespace ScientificCalculator
 
         }
 
+        private TwoValFunc SelectOperator(string op)
+        {
+            if (op == "+") return Operations.Add;
+            else if (op == "-") return Operations.Sub;
+            else if (op == "*") return Operations.Mul;
+            else if (op == "/") return Operations.Div;
+            else if (op == "x^y") return Math.Pow;
+            else return Operations.Noop;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -459,6 +439,12 @@ namespace ScientificCalculator
             InOutNumber = 0;
         }
 
+        private void ResetAll()
+        {
+            InOutNumber = 0;
+            Operate = Operations.Noop;
+            OperatorSettingFlag = true;
+        }
         //押されたキー判定と入力された数字を保存
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -503,6 +489,10 @@ namespace ScientificCalculator
                     break;
                 case Keys.Delete:
                     add_char = 'd';
+                    break;
+                case Keys.Escape:
+                    ResetAll();
+                    add_char = '\0';
                     break;
                 default:
                     add_char = '\0';
