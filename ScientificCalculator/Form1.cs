@@ -142,9 +142,10 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            angle = Math.PI * valueLeft / 180;  //ラジアンに直す
+            angle = Math.PI * InOutNumber / 180;  //ラジアンに直す
             valueLeft = Math.Sin(angle);
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
+
         }
 
         private void cosButton_Click(object sender, EventArgs e)
@@ -155,7 +156,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.PI * valueLeft / 180;  //ラジアンに直す
             valueLeft = Math.Cos(angle);
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
         }
 
         private void tanButton_Click(object sender, EventArgs e)
@@ -166,7 +167,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.PI * valueLeft / 180;  //ラジアンに直す
             valueLeft = Math.Tan(angle);
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
         }
 
         private void logButton_Click(object sender, EventArgs e)
@@ -176,7 +177,7 @@ namespace ScientificCalculator
 
             //入力されてる値に演算を適用する
             valueLeft = Math.Log10(valueLeft);  //入力値の常用対数(底10)を計算
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
         }
 
         private void arcsinButton_Click(object sender, EventArgs e)
@@ -187,7 +188,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.Asin(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
         }
 
         private void arccosButton_Click(object sender, EventArgs e)
@@ -198,7 +199,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.Acos(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
         }
 
         private void arctanButton_Click(object sender, EventArgs e)
@@ -209,7 +210,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.Atan(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
         }
 
         private void expButton_Click(object sender, EventArgs e)
@@ -431,10 +432,9 @@ namespace ScientificCalculator
                 textBox1.Text = "";
                 InputReset = false;
             }
-            else
-                textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1, 1);
+            textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1, 1);
             if (textBox1.Text == "-") UpdateTotal(0, "-");
-            else if (textBox1.Text == "") InOutNumber = 0;
+            if (textBox1.Text == "") InOutNumber = 0;
             else if (textBox1.Text.LastOrDefault() != '.')
             {
                 if (double.TryParse(textBox1.Text, out double value))
@@ -538,21 +538,6 @@ namespace ScientificCalculator
         {
             if (e.KeyChar == '.') InputDot();
             else if (e.KeyChar == '-') InputMinus();
-            else if (e.KeyChar == '+')
-            {
-                enzanshi1 = "+";
-                enzanshinyuuryoku();
-            }
-            else if (e.KeyChar == '*')
-            {
-                enzanshi1 = "*";
-                enzanshinyuuryoku();
-            }
-            else if (e.KeyChar == '/')
-            {
-                enzanshi1 = "/";
-                enzanshinyuuryoku();
-            }
         }
     }
 }
