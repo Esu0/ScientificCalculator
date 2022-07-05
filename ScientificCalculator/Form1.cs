@@ -105,6 +105,7 @@ namespace ScientificCalculator
 
             enzanshi1 = "*";    //入力された演算子を格納
             enzanshinyuuryoku();    //演算子の入力がどのようなものか判定
+            textEnzanshi.Text = "*";
 
         }
 
@@ -113,7 +114,7 @@ namespace ScientificCalculator
 
             enzanshi1 = "+";
             enzanshinyuuryoku();
-
+            textEnzanshi.Text = "+";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -126,6 +127,7 @@ namespace ScientificCalculator
 
             enzanshi1 = "-";
             enzanshinyuuryoku();
+            textEnzanshi.Text = "-";
 
         }
 
@@ -134,6 +136,12 @@ namespace ScientificCalculator
 
             enzanshi1 = "/";
             enzanshinyuuryoku();
+            textEnzanshi.Text = "/";
+        }
+        // 初期化ボタンを押したとき
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            DeleteAll();
         }
 
         private void sinButton_Click(object sender, EventArgs e)
@@ -145,7 +153,7 @@ namespace ScientificCalculator
             angle = Math.PI * InOutNumber / 180;  //ラジアンに直す
             valueLeft = Math.Sin(angle);
             InOutNumber = valueLeft;
-
+            textEnzanshi.Text = "sin";
         }
 
         private void cosButton_Click(object sender, EventArgs e)
@@ -157,6 +165,7 @@ namespace ScientificCalculator
             angle = Math.PI * valueLeft / 180;  //ラジアンに直す
             valueLeft = Math.Cos(angle);
             InOutNumber = valueLeft;
+            textEnzanshi.Text = "cos";
         }
 
         private void tanButton_Click(object sender, EventArgs e)
@@ -168,6 +177,7 @@ namespace ScientificCalculator
             angle = Math.PI * valueLeft / 180;  //ラジアンに直す
             valueLeft = Math.Tan(angle);
             InOutNumber = valueLeft;
+            textEnzanshi.Text = "tan";
         }
 
         private void logButton_Click(object sender, EventArgs e)
@@ -178,6 +188,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             valueLeft = Math.Log10(valueLeft);  //入力値の常用対数(底10)を計算
             InOutNumber = valueLeft;
+            textEnzanshi.Text = "log";
         }
 
         private void arcsinButton_Click(object sender, EventArgs e)
@@ -189,6 +200,7 @@ namespace ScientificCalculator
             angle = Math.Asin(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
             InOutNumber = valueLeft;
+            textEnzanshi.Text = "arcsin";
         }
 
         private void arccosButton_Click(object sender, EventArgs e)
@@ -200,6 +212,7 @@ namespace ScientificCalculator
             angle = Math.Acos(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
             InOutNumber = valueLeft;
+            textEnzanshi.Text = "arccos";
         }
 
         private void arctanButton_Click(object sender, EventArgs e)
@@ -211,6 +224,7 @@ namespace ScientificCalculator
             angle = Math.Atan(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
             InOutNumber = valueLeft;
+            textEnzanshi.Text = "arctan";
         }
 
         private void expButton_Click(object sender, EventArgs e)
@@ -222,6 +236,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             valueLeft = Math.Exp(valueLeft);  //入力値の常用対数(底10)を計算
             textBox1.Text = valueLeft.ToString();
+            textEnzanshi.Text = "exp";
         }
 
         private void powButton1_Click(object sender, EventArgs e)
@@ -233,6 +248,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             valueLeft = Math.Pow(valueLeft, 2);  //入力値の常用対数(底10)を計算
             textBox1.Text = valueLeft.ToString();
+            textEnzanshi.Text = "^";
         }
 
         /*数字のボタンを押したとき*/
@@ -241,7 +257,7 @@ namespace ScientificCalculator
 
             enzanshi1 = "x^y";
             enzanshinyuuryoku();
-
+            textEnzanshi.Text = "^";
         }
 
         private TwoValFunc SelectOperator(string op)
@@ -539,5 +555,7 @@ namespace ScientificCalculator
             if (e.KeyChar == '.') InputDot();
             else if (e.KeyChar == '-') InputMinus();
         }
+
+
     }
 }
