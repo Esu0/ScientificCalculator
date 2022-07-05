@@ -150,9 +150,9 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            angle = Math.PI * valueLeft / 180;  //ラジアンに直す
+            angle = Math.PI * InOutNumber / 180;  //ラジアンに直す
             valueLeft = Math.Sin(angle);
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
             textEnzanshi.Text = "sin";
         }
 
@@ -164,7 +164,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.PI * valueLeft / 180;  //ラジアンに直す
             valueLeft = Math.Cos(angle);
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
             textEnzanshi.Text = "cos";
         }
 
@@ -176,7 +176,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.PI * valueLeft / 180;  //ラジアンに直す
             valueLeft = Math.Tan(angle);
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
             textEnzanshi.Text = "tan";
         }
 
@@ -187,7 +187,7 @@ namespace ScientificCalculator
 
             //入力されてる値に演算を適用する
             valueLeft = Math.Log10(valueLeft);  //入力値の常用対数(底10)を計算
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
             textEnzanshi.Text = "log";
         }
 
@@ -199,7 +199,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.Asin(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
             textEnzanshi.Text = "arcsin";
         }
 
@@ -211,7 +211,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.Acos(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
             textEnzanshi.Text = "arccos";
         }
 
@@ -223,7 +223,7 @@ namespace ScientificCalculator
             //入力されてる値に演算を適用する
             angle = Math.Atan(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            textBox1.Text = valueLeft.ToString();
+            InOutNumber = valueLeft;
             textEnzanshi.Text = "arctan";
         }
 
