@@ -48,9 +48,14 @@ namespace ScientificCalculator
 
         TwoValFunc Operate = Operations.Noop;
         bool OperatorSettingFlag = true;
-
+        bool InputReset = false;
         private void enzanshinyuuryoku()    //演算子の入力がどのようなものか判定
         {
+            valueLeft = InOutNumber;    //内部変数に格納
+            Operate = SelectOperator(enzanshi1);//入力された演算子を保持
+            OperatorSettingFlag = true;
+            InputReset = true;
+            /*
             if (Operate == Operations.Noop)   //一回目の入力の時
             {
                 valueLeft = InOutNumber;    //内部変数に格納
@@ -75,6 +80,7 @@ namespace ScientificCalculator
                 OperatorSettingFlag = true;
                 Operate = SelectOperator(enzanshi1);//新しい演算子を適用
             }
+            */
         }
         private void enzan2()   //演算子二回目以降の入力の時
         {
@@ -84,7 +90,7 @@ namespace ScientificCalculator
         }
         private void jikkouButton_Click(object sender, EventArgs e)
         {
-            if(OperatorSettingFlag)valueRight = InOutNumber; //2つめの値を内部変数に格納
+            if (OperatorSettingFlag) valueRight = InOutNumber; //2つめの値を内部変数に格納
             OperatorSettingFlag = false;
 
             //演算子の判定と計算を行う
@@ -309,8 +315,8 @@ namespace ScientificCalculator
             textBox1.Text = num.ToString();
             if (convertibleBinHex(value))
             {
-                textBox2.Text = ((long)num).ToString("x");
-                textBox3.Text = Convert.ToString((long)num, 2);
+                textBox3.Text = ((long)num).ToString("x");
+                textBox2.Text = Convert.ToString((long)num, 2);
             }
             else
             {
@@ -325,8 +331,8 @@ namespace ScientificCalculator
             textBox1.Text = textOut;
             if (convertibleBinHex(value))
             {
-                textBox2.Text = ((long)num).ToString("x");
-                textBox3.Text = Convert.ToString((long)num, 2);
+                textBox3.Text = ((long)num).ToString("x");
+                textBox2.Text = Convert.ToString((long)num, 2);
             }
             else
             {
@@ -339,10 +345,10 @@ namespace ScientificCalculator
         {
             num = value;
             textBox1.Text = num.ToString() + tail;
-            if(convertibleBinHex(value))
+            if (convertibleBinHex(value))
             {
-                textBox2.Text = ((long)num).ToString("x");
-                textBox3.Text = Convert.ToString((long)num, 2);
+                textBox3.Text = ((long)num).ToString("x");
+                textBox2.Text = Convert.ToString((long)num, 2);
             }
             else
             {
@@ -353,8 +359,13 @@ namespace ScientificCalculator
         //数字一文字を入力
         private void InputDigit(char digit)
         {
+            if (InputReset)
+            {
+                textBox1.Text = "";
+                InputReset = false;
+            }
             textBox1.Text += digit;
-            if (double.TryParse(textBox1.Text, out double value)) 
+            if (double.TryParse(textBox1.Text, out double value))
             {
                 InOutNumber = value;
             }
@@ -367,7 +378,12 @@ namespace ScientificCalculator
         //マイナス(符号)を入力
         private void InputMinus()
         {
-            if(textBox1.Text == "")
+            if (InputReset)
+            {
+                textBox1.Text = "";
+                InputReset = false;
+            }
+            if (textBox1.Text == "")
             {
                 textBox1.Text = "-";
                 return;
@@ -380,7 +396,7 @@ namespace ScientificCalculator
             {
                 textBox1.Text = "-" + textBox1.Text;
             }
-            if (textBox1.Text.LastOrDefault() != '.') 
+            if (textBox1.Text.LastOrDefault() != '.')
             {
                 if (double.TryParse(textBox1.Text, out double value))
                 {
@@ -396,7 +412,12 @@ namespace ScientificCalculator
         //小数点を入力
         private void InputDot()
         {
-            if (textBox1.Text.LastIndexOf('.') == -1) 
+            if (InputReset)
+            {
+                textBox1.Text = "";
+                InputReset = false;
+            }
+            if (textBox1.Text.LastIndexOf('.') == -1)
             {
                 textBox1.Text += ".";
             }
@@ -405,9 +426,15 @@ namespace ScientificCalculator
         //1文字消去
         private void DeleteOne()
         {
-            textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1, 1);
+            if (InputReset)
+            {
+                textBox1.Text = "";
+                InputReset = false;
+            }
+            else
+                textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1, 1);
             if (textBox1.Text == "-") UpdateTotal(0, "-");
-            if (textBox1.Text == "") InOutNumber = 0;
+            else if (textBox1.Text == "") InOutNumber = 0;
             else if (textBox1.Text.LastOrDefault() != '.')
             {
                 if (double.TryParse(textBox1.Text, out double value))
@@ -439,6 +466,7 @@ namespace ScientificCalculator
             InOutNumber = 0;
         }
 
+        //全リセット
         private void ResetAll()
         {
             InOutNumber = 0;
@@ -510,6 +538,21 @@ namespace ScientificCalculator
         {
             if (e.KeyChar == '.') InputDot();
             else if (e.KeyChar == '-') InputMinus();
+            else if (e.KeyChar == '+')
+            {
+                enzanshi1 = "+";
+                enzanshinyuuryoku();
+            }
+            else if (e.KeyChar == '*')
+            {
+                enzanshi1 = "*";
+                enzanshinyuuryoku();
+            }
+            else if (e.KeyChar == '/')
+            {
+                enzanshi1 = "/";
+                enzanshinyuuryoku();
+            }
         }
     }
 }
