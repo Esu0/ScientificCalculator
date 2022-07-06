@@ -15,7 +15,7 @@ namespace ScientificCalculator
         delegate double OneValFunc(double val);
         delegate double TwoValFunc(double val1, double val2);
 
-        public double total = 0;
+        //public double total = 0;
         private double num = 0;//直接変更しない
 
         ///<summary>
@@ -35,9 +35,27 @@ namespace ScientificCalculator
             set { UpdateTotal(value); }
         }
 
+        void NumberMem(bool a) // 演算子で使うとき引数true
+        {
+            if (a)
+            {
+                textRight.Text = "";
+                textLeft.Text = valueLeft.ToString();
+            }
+            else
+            {
+                textRight.Text = valueRight.ToString();
+                textLeft.Text = valueLeft.ToString();
+
+            }
+
+        }
+
+
         public Form1()
         {
             InitializeComponent();
+            
         }
 
 
@@ -88,33 +106,27 @@ namespace ScientificCalculator
             InOutNumber = Operate(valueLeft, valueRight);
             valueLeft = InOutNumber;
         }
-        private void jikkouButton_Click(object sender, EventArgs e)
-        {
-            if (OperatorSettingFlag) valueRight = InOutNumber; //2つめの値を内部変数に格納
-            OperatorSettingFlag = false;
-
-            //演算子の判定と計算を行う
-            InOutNumber = Operate(valueLeft, valueRight);
-            valueLeft = InOutNumber;
-        }
 
 
         /*演算子のボタンを押したとき*/
-        private void button14_Click(object sender, EventArgs e)
+        private void button14_Click(object sender, MouseEventArgs e)
         {
 
             enzanshi1 = "*";    //入力された演算子を格納
             enzanshinyuuryoku();    //演算子の入力がどのようなものか判定
             textEnzanshi.Text = "*";
 
+            NumberMem(true);
         }
 
-        private void plusButton_Click(object sender, EventArgs e)
+        private void plusButton_Click(object sender, MouseEventArgs e)
         {
 
             enzanshi1 = "+";
             enzanshinyuuryoku();
             textEnzanshi.Text = "+";
+
+            NumberMem(true);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -122,29 +134,31 @@ namespace ScientificCalculator
 
         }
 
-        private void minusButton_Click(object sender, EventArgs e)
+        private void minusButton_Click(object sender, MouseEventArgs e)
         {
 
             enzanshi1 = "-";
             enzanshinyuuryoku();
             textEnzanshi.Text = "-";
 
+            NumberMem(true);
         }
 
-        private void divideButton_Click(object sender, EventArgs e)
+        private void divideButton_Click(object sender, MouseEventArgs e)
         {
-
             enzanshi1 = "/";
             enzanshinyuuryoku();
             textEnzanshi.Text = "/";
+
+            NumberMem(true);
         }
         // 初期化ボタンを押したとき
-        private void clearButton_Click(object sender, EventArgs e)
+        private void clearButton_Click(object sender, MouseEventArgs e)
         {
-            DeleteAll();
+            ResetAll();
         }
 
-        private void sinButton_Click(object sender, EventArgs e)
+        private void sinButton_Click(object sender, MouseEventArgs e)
         {
             enzanshi1 = "one";
             enzanshinyuuryoku();
@@ -156,7 +170,7 @@ namespace ScientificCalculator
             textEnzanshi.Text = "sin";
         }
 
-        private void cosButton_Click(object sender, EventArgs e)
+        private void cosButton_Click(object sender, MouseEventArgs e)
         {
             enzanshi1 = "one";
             enzanshinyuuryoku();
@@ -168,7 +182,7 @@ namespace ScientificCalculator
             textEnzanshi.Text = "cos";
         }
 
-        private void tanButton_Click(object sender, EventArgs e)
+        private void tanButton_Click(object sender, MouseEventArgs e)
         {
             enzanshi1 = "one";
             enzanshinyuuryoku();
@@ -180,7 +194,7 @@ namespace ScientificCalculator
             textEnzanshi.Text = "tan";
         }
 
-        private void logButton_Click(object sender, EventArgs e)
+        private void logButton_Click(object sender, MouseEventArgs e)
         {
             enzanshi1 = "one";
             enzanshinyuuryoku();
@@ -191,7 +205,7 @@ namespace ScientificCalculator
             textEnzanshi.Text = "log";
         }
 
-        private void arcsinButton_Click(object sender, EventArgs e)
+        private void arcsinButton_Click(object sender, MouseEventArgs e)
         {
             enzanshi1 = "one";
             enzanshinyuuryoku();
@@ -203,7 +217,7 @@ namespace ScientificCalculator
             textEnzanshi.Text = "arcsin";
         }
 
-        private void arccosButton_Click(object sender, EventArgs e)
+        private void arccosButton_Click(object sender, MouseEventArgs e)
         {
             enzanshi1 = "one";
             enzanshinyuuryoku();
@@ -215,7 +229,7 @@ namespace ScientificCalculator
             textEnzanshi.Text = "arccos";
         }
 
-        private void arctanButton_Click(object sender, EventArgs e)
+        private void arctanButton_Click(object sender, MouseEventArgs e)
         {
             enzanshi1 = "one";
             enzanshinyuuryoku();
@@ -227,7 +241,7 @@ namespace ScientificCalculator
             textEnzanshi.Text = "arctan";
         }
 
-        private void expButton_Click(object sender, EventArgs e)
+        private void expButton_Click(object sender, MouseEventArgs e)
         {
 
             enzanshi1 = "one";
@@ -239,7 +253,7 @@ namespace ScientificCalculator
             textEnzanshi.Text = "exp";
         }
 
-        private void powButton1_Click(object sender, EventArgs e)
+        private void powButton1_Click(object sender, MouseEventArgs e)
         {
 
             enzanshi1 = "one";
@@ -252,12 +266,14 @@ namespace ScientificCalculator
         }
 
         /*数字のボタンを押したとき*/
-        private void powButton2_Click(object sender, EventArgs e)
+        private void powButton2_Click(object sender, MouseEventArgs e)
         {
 
             enzanshi1 = "x^y";
             enzanshinyuuryoku();
             textEnzanshi.Text = "^";
+
+            NumberMem(true);
         }
 
         private TwoValFunc SelectOperator(string op)
@@ -270,52 +286,52 @@ namespace ScientificCalculator
             else return Operations.Noop;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, MouseEventArgs e)
         {
             InputDigit('1');
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, MouseEventArgs e)
         {
             InputDigit('2');
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, MouseEventArgs e)
         {
             InputDigit('3');
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, MouseEventArgs e)
         {
             InputDigit('4');
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, MouseEventArgs e)
         {
             InputDigit('5');
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, MouseEventArgs e)
         {
             InputDigit('6');
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, MouseEventArgs e)
         {
             InputDigit('7');
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, MouseEventArgs e)
         {
             InputDigit('8');
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, MouseEventArgs e)
         {
             InputDigit('9');
         }
 
-        private void button0_Click(object sender, EventArgs e)
+        private void button0_Click(object sender, MouseEventArgs e)
         {
             InputDigit('0');
         }
@@ -488,6 +504,10 @@ namespace ScientificCalculator
             InOutNumber = 0;
             Operate = Operations.Noop;
             OperatorSettingFlag = true;
+            textRight.Text = "";
+            textLeft.Text = "";
+            textEnzanshi.Text = "";
+            valueLeft = 0;
         }
         //押されたキー判定と入力された数字を保存
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -554,8 +574,28 @@ namespace ScientificCalculator
         {
             if (e.KeyChar == '.') InputDot();
             else if (e.KeyChar == '-') InputMinus();
+            else if (e.KeyChar == '+') plusButton_Click(null, null);
+            else if (e.KeyChar == '*') button14_Click(null, null);
+            else if (e.KeyChar == '/') divideButton_Click(null, null);
+            else if (e.KeyChar == '^') powButton2_Click(null, null);
         }
 
+        private void jikkouButton_Click(object sender, EventArgs e)
+        {
+            if (OperatorSettingFlag) valueRight = InOutNumber; //2つめの値を内部変数に格納
+            OperatorSettingFlag = false;
 
+
+            NumberMem(false);
+
+            //演算子の判定と計算を行う
+            InOutNumber = Operate(valueLeft, valueRight);
+            valueLeft = InOutNumber;
+        }
+
+        private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) jikkouButton_Click(null, null);
+        }
     }
 }
