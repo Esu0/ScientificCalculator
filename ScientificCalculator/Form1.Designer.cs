@@ -69,187 +69,249 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 15F);
-            this.textBox1.Location = new System.Drawing.Point(115, 54);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(153, 68);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(5);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(266, 27);
+            this.textBox1.Size = new System.Drawing.Size(353, 32);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TabStop = false;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("MS UI Gothic", 15F);
-            this.textBox2.Location = new System.Drawing.Point(115, 87);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Location = new System.Drawing.Point(153, 109);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(5);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(266, 27);
+            this.textBox2.Size = new System.Drawing.Size(353, 32);
             this.textBox2.TabIndex = 1;
+            this.textBox2.TabStop = false;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("MS UI Gothic", 15F);
-            this.textBox3.Location = new System.Drawing.Point(115, 120);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Location = new System.Drawing.Point(153, 150);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(5);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(267, 27);
+            this.textBox3.Size = new System.Drawing.Size(355, 32);
             this.textBox3.TabIndex = 2;
+            this.textBox3.TabStop = false;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // sinButton
             // 
-            this.sinButton.Location = new System.Drawing.Point(48, 167);
-            this.sinButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sinButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sinButton.Location = new System.Drawing.Point(64, 209);
+            this.sinButton.Margin = new System.Windows.Forms.Padding(5);
             this.sinButton.Name = "sinButton";
-            this.sinButton.Size = new System.Drawing.Size(62, 23);
+            this.sinButton.Size = new System.Drawing.Size(83, 29);
             this.sinButton.TabIndex = 3;
+            this.sinButton.TabStop = false;
             this.sinButton.Text = "sin";
             this.sinButton.UseVisualStyleBackColor = true;
-            this.sinButton.Click += new System.EventHandler(this.sinButton_Click);
+            this.sinButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.sinButton_Click);
+            this.sinButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // cosButton
             // 
-            this.cosButton.Location = new System.Drawing.Point(116, 167);
-            this.cosButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cosButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cosButton.Location = new System.Drawing.Point(155, 209);
+            this.cosButton.Margin = new System.Windows.Forms.Padding(5);
             this.cosButton.Name = "cosButton";
-            this.cosButton.Size = new System.Drawing.Size(62, 23);
+            this.cosButton.Size = new System.Drawing.Size(83, 29);
             this.cosButton.TabIndex = 4;
+            this.cosButton.TabStop = false;
             this.cosButton.Text = "cos";
             this.cosButton.UseVisualStyleBackColor = true;
-            this.cosButton.Click += new System.EventHandler(this.cosButton_Click);
+            this.cosButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cosButton_Click);
+            this.cosButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // tanButton
             // 
-            this.tanButton.Location = new System.Drawing.Point(184, 167);
+            this.tanButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tanButton.Location = new System.Drawing.Point(245, 209);
+            this.tanButton.Margin = new System.Windows.Forms.Padding(4);
             this.tanButton.Name = "tanButton";
-            this.tanButton.Size = new System.Drawing.Size(62, 23);
+            this.tanButton.Size = new System.Drawing.Size(83, 29);
             this.tanButton.TabIndex = 5;
+            this.tanButton.TabStop = false;
             this.tanButton.Text = "tan";
             this.tanButton.UseVisualStyleBackColor = true;
-            this.tanButton.Click += new System.EventHandler(this.tanButton_Click);
+            this.tanButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tanButton_Click);
+            this.tanButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // logButton
             // 
-            this.logButton.Location = new System.Drawing.Point(252, 167);
+            this.logButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.logButton.Location = new System.Drawing.Point(336, 209);
+            this.logButton.Margin = new System.Windows.Forms.Padding(4);
             this.logButton.Name = "logButton";
-            this.logButton.Size = new System.Drawing.Size(62, 23);
+            this.logButton.Size = new System.Drawing.Size(83, 29);
             this.logButton.TabIndex = 6;
+            this.logButton.TabStop = false;
             this.logButton.Text = "log";
             this.logButton.UseVisualStyleBackColor = true;
-            this.logButton.Click += new System.EventHandler(this.logButton_Click);
+            this.logButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.logButton_Click);
+            this.logButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // expButton
             // 
-            this.expButton.Location = new System.Drawing.Point(320, 167);
+            this.expButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.expButton.Location = new System.Drawing.Point(427, 209);
+            this.expButton.Margin = new System.Windows.Forms.Padding(4);
             this.expButton.Name = "expButton";
-            this.expButton.Size = new System.Drawing.Size(62, 23);
+            this.expButton.Size = new System.Drawing.Size(83, 29);
             this.expButton.TabIndex = 10;
+            this.expButton.TabStop = false;
             this.expButton.Text = "exp";
             this.expButton.UseVisualStyleBackColor = true;
-            this.expButton.Click += new System.EventHandler(this.expButton_Click);
+            this.expButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.expButton_Click);
+            this.expButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // arctanButton
             // 
-            this.arctanButton.Location = new System.Drawing.Point(184, 196);
+            this.arctanButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.arctanButton.Location = new System.Drawing.Point(245, 245);
+            this.arctanButton.Margin = new System.Windows.Forms.Padding(4);
             this.arctanButton.Name = "arctanButton";
-            this.arctanButton.Size = new System.Drawing.Size(62, 23);
+            this.arctanButton.Size = new System.Drawing.Size(83, 29);
             this.arctanButton.TabIndex = 9;
+            this.arctanButton.TabStop = false;
             this.arctanButton.Text = "arctan";
             this.arctanButton.UseVisualStyleBackColor = true;
-            this.arctanButton.Click += new System.EventHandler(this.arctanButton_Click);
+            this.arctanButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.arctanButton_Click);
+            this.arctanButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // arccosButton
             // 
-            this.arccosButton.Location = new System.Drawing.Point(116, 196);
+            this.arccosButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.arccosButton.Location = new System.Drawing.Point(155, 245);
+            this.arccosButton.Margin = new System.Windows.Forms.Padding(4);
             this.arccosButton.Name = "arccosButton";
-            this.arccosButton.Size = new System.Drawing.Size(62, 23);
+            this.arccosButton.Size = new System.Drawing.Size(83, 29);
             this.arccosButton.TabIndex = 8;
+            this.arccosButton.TabStop = false;
             this.arccosButton.Text = "arccos";
             this.arccosButton.UseVisualStyleBackColor = true;
-            this.arccosButton.Click += new System.EventHandler(this.arccosButton_Click);
+            this.arccosButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.arccosButton_Click);
+            this.arccosButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // arcsinButton
             // 
-            this.arcsinButton.Location = new System.Drawing.Point(48, 196);
+            this.arcsinButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.arcsinButton.Location = new System.Drawing.Point(64, 245);
+            this.arcsinButton.Margin = new System.Windows.Forms.Padding(4);
             this.arcsinButton.Name = "arcsinButton";
-            this.arcsinButton.Size = new System.Drawing.Size(62, 23);
+            this.arcsinButton.Size = new System.Drawing.Size(83, 29);
             this.arcsinButton.TabIndex = 7;
+            this.arcsinButton.TabStop = false;
             this.arcsinButton.Text = "arcsin";
             this.arcsinButton.UseVisualStyleBackColor = true;
-            this.arcsinButton.Click += new System.EventHandler(this.arcsinButton_Click);
+            this.arcsinButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.arcsinButton_Click);
+            this.arcsinButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // minusButton
             // 
-            this.minusButton.Location = new System.Drawing.Point(320, 225);
+            this.minusButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.minusButton.Location = new System.Drawing.Point(427, 281);
+            this.minusButton.Margin = new System.Windows.Forms.Padding(4);
             this.minusButton.Name = "minusButton";
-            this.minusButton.Size = new System.Drawing.Size(62, 23);
+            this.minusButton.Size = new System.Drawing.Size(83, 29);
             this.minusButton.TabIndex = 14;
+            this.minusButton.TabStop = false;
             this.minusButton.Text = "-";
             this.minusButton.UseVisualStyleBackColor = true;
-            this.minusButton.Click += new System.EventHandler(this.minusButton_Click);
+            this.minusButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.minusButton_Click);
+            this.minusButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // plusButton
             // 
-            this.plusButton.Location = new System.Drawing.Point(252, 225);
+            this.plusButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.plusButton.Location = new System.Drawing.Point(336, 281);
+            this.plusButton.Margin = new System.Windows.Forms.Padding(4);
             this.plusButton.Name = "plusButton";
-            this.plusButton.Size = new System.Drawing.Size(62, 23);
+            this.plusButton.Size = new System.Drawing.Size(83, 29);
             this.plusButton.TabIndex = 13;
+            this.plusButton.TabStop = false;
             this.plusButton.Text = "+";
             this.plusButton.UseVisualStyleBackColor = true;
-            this.plusButton.Click += new System.EventHandler(this.plusButton_Click);
+            this.plusButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.plusButton_Click);
+            this.plusButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // powButton2
             // 
-            this.powButton2.Location = new System.Drawing.Point(320, 196);
+            this.powButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.powButton2.Location = new System.Drawing.Point(427, 245);
+            this.powButton2.Margin = new System.Windows.Forms.Padding(4);
             this.powButton2.Name = "powButton2";
-            this.powButton2.Size = new System.Drawing.Size(62, 23);
+            this.powButton2.Size = new System.Drawing.Size(83, 29);
             this.powButton2.TabIndex = 12;
+            this.powButton2.TabStop = false;
             this.powButton2.Text = "x^y";
             this.powButton2.UseVisualStyleBackColor = true;
-            this.powButton2.Click += new System.EventHandler(this.powButton2_Click);
+            this.powButton2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.powButton2_Click);
+            this.powButton2.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // powButton1
             // 
-            this.powButton1.Location = new System.Drawing.Point(252, 196);
+            this.powButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.powButton1.Location = new System.Drawing.Point(336, 245);
+            this.powButton1.Margin = new System.Windows.Forms.Padding(4);
             this.powButton1.Name = "powButton1";
-            this.powButton1.Size = new System.Drawing.Size(62, 23);
+            this.powButton1.Size = new System.Drawing.Size(83, 29);
             this.powButton1.TabIndex = 11;
+            this.powButton1.TabStop = false;
             this.powButton1.Text = "x^2";
             this.powButton1.UseVisualStyleBackColor = true;
-            this.powButton1.Click += new System.EventHandler(this.powButton1_Click);
+            this.powButton1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.powButton1_Click);
+            this.powButton1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // divideButton
             // 
-            this.divideButton.Location = new System.Drawing.Point(320, 254);
+            this.divideButton.CausesValidation = false;
+            this.divideButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.divideButton.Location = new System.Drawing.Point(427, 318);
+            this.divideButton.Margin = new System.Windows.Forms.Padding(4);
             this.divideButton.Name = "divideButton";
-            this.divideButton.Size = new System.Drawing.Size(62, 23);
+            this.divideButton.Size = new System.Drawing.Size(83, 29);
             this.divideButton.TabIndex = 16;
+            this.divideButton.TabStop = false;
             this.divideButton.Text = "/";
             this.divideButton.UseVisualStyleBackColor = true;
-            this.divideButton.Click += new System.EventHandler(this.divideButton_Click);
+            this.divideButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.divideButton_Click);
+            this.divideButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // multiButton
             // 
-            this.multiButton.Location = new System.Drawing.Point(252, 254);
+            this.multiButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.multiButton.Location = new System.Drawing.Point(336, 318);
+            this.multiButton.Margin = new System.Windows.Forms.Padding(4);
             this.multiButton.Name = "multiButton";
-            this.multiButton.Size = new System.Drawing.Size(62, 23);
+            this.multiButton.Size = new System.Drawing.Size(83, 29);
             this.multiButton.TabIndex = 15;
+            this.multiButton.TabStop = false;
             this.multiButton.Text = "*";
             this.multiButton.UseVisualStyleBackColor = true;
-            this.multiButton.Click += new System.EventHandler(this.button14_Click);
+            this.multiButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button14_Click);
+            this.multiButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // jikkouButton
             // 
-            this.jikkouButton.Location = new System.Drawing.Point(252, 283);
+            this.jikkouButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.jikkouButton.Location = new System.Drawing.Point(336, 354);
+            this.jikkouButton.Margin = new System.Windows.Forms.Padding(4);
             this.jikkouButton.Name = "jikkouButton";
-            this.jikkouButton.Size = new System.Drawing.Size(130, 52);
+            this.jikkouButton.Size = new System.Drawing.Size(173, 65);
             this.jikkouButton.TabIndex = 17;
+            this.jikkouButton.TabStop = false;
             this.jikkouButton.Text = "実行";
             this.jikkouButton.UseVisualStyleBackColor = true;
             this.jikkouButton.Click += new System.EventHandler(this.jikkouButton_Click);
+            this.jikkouButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // label4
             // 
@@ -260,190 +322,229 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(47, 283);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Location = new System.Drawing.Point(63, 354);
+            this.button1.Margin = new System.Windows.Forms.Padding(5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(63, 23);
+            this.button1.Size = new System.Drawing.Size(84, 29);
             this.button1.TabIndex = 24;
+            this.button1.TabStop = false;
             this.button1.Text = "1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button1_Click);
+            this.button1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(116, 283);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.Location = new System.Drawing.Point(155, 354);
+            this.button2.Margin = new System.Windows.Forms.Padding(5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(63, 23);
+            this.button2.Size = new System.Drawing.Size(84, 29);
             this.button2.TabIndex = 25;
+            this.button2.TabStop = false;
             this.button2.Text = "2";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button2_Click);
+            this.button2.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(184, 283);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.Location = new System.Drawing.Point(245, 354);
+            this.button3.Margin = new System.Windows.Forms.Padding(5);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(63, 23);
+            this.button3.Size = new System.Drawing.Size(84, 29);
             this.button3.TabIndex = 26;
+            this.button3.TabStop = false;
             this.button3.Text = "3";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button3_Click);
+            this.button3.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(47, 254);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button4.Location = new System.Drawing.Point(63, 318);
+            this.button4.Margin = new System.Windows.Forms.Padding(5);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(63, 23);
+            this.button4.Size = new System.Drawing.Size(84, 29);
             this.button4.TabIndex = 27;
+            this.button4.TabStop = false;
             this.button4.Text = "4";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button4_Click);
+            this.button4.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(115, 254);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button5.Location = new System.Drawing.Point(153, 318);
+            this.button5.Margin = new System.Windows.Forms.Padding(5);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(63, 23);
+            this.button5.Size = new System.Drawing.Size(84, 29);
             this.button5.TabIndex = 28;
+            this.button5.TabStop = false;
             this.button5.Text = "5";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button5_Click);
+            this.button5.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(184, 254);
-            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button6.Location = new System.Drawing.Point(245, 318);
+            this.button6.Margin = new System.Windows.Forms.Padding(5);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(63, 23);
+            this.button6.Size = new System.Drawing.Size(84, 29);
             this.button6.TabIndex = 29;
+            this.button6.TabStop = false;
             this.button6.Text = "6";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button6_Click);
+            this.button6.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(47, 225);
-            this.button7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button7.Location = new System.Drawing.Point(63, 281);
+            this.button7.Margin = new System.Windows.Forms.Padding(5);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(63, 23);
+            this.button7.Size = new System.Drawing.Size(84, 29);
             this.button7.TabIndex = 30;
+            this.button7.TabStop = false;
             this.button7.Text = "7";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button7.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button7_Click);
+            this.button7.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(115, 225);
-            this.button8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button8.Location = new System.Drawing.Point(153, 281);
+            this.button8.Margin = new System.Windows.Forms.Padding(5);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(63, 23);
+            this.button8.Size = new System.Drawing.Size(84, 29);
             this.button8.TabIndex = 31;
+            this.button8.TabStop = false;
             this.button8.Text = "8";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button8_Click);
+            this.button8.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(184, 225);
-            this.button9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button9.Location = new System.Drawing.Point(245, 281);
+            this.button9.Margin = new System.Windows.Forms.Padding(5);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(63, 23);
+            this.button9.Size = new System.Drawing.Size(84, 29);
             this.button9.TabIndex = 32;
+            this.button9.TabStop = false;
             this.button9.Text = "9";
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button9.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button9_Click);
+            this.button9.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(47, 312);
-            this.button0.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button0.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button0.Location = new System.Drawing.Point(63, 390);
+            this.button0.Margin = new System.Windows.Forms.Padding(5);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(63, 23);
+            this.button0.Size = new System.Drawing.Size(84, 29);
             this.button0.TabIndex = 35;
+            this.button0.TabStop = false;
             this.button0.Text = "0";
             this.button0.UseVisualStyleBackColor = true;
-            this.button0.Click += new System.EventHandler(this.button0_Click);
+            this.button0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button0_Click);
+            this.button0.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 64);
+            this.label1.Location = new System.Drawing.Point(80, 80);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(53, 15);
             this.label1.TabIndex = 31;
             this.label1.Text = "10進数";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 97);
+            this.label2.Location = new System.Drawing.Point(80, 121);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 12);
+            this.label2.Size = new System.Drawing.Size(45, 15);
             this.label2.TabIndex = 32;
             this.label2.Text = "2進数";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(60, 130);
+            this.label3.Location = new System.Drawing.Point(80, 162);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.Size = new System.Drawing.Size(53, 15);
             this.label3.TabIndex = 33;
             this.label3.Text = "16進数";
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(183, 312);
-            this.clearButton.Margin = new System.Windows.Forms.Padding(4);
+            this.clearButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clearButton.Location = new System.Drawing.Point(244, 390);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(5);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(63, 23);
+            this.clearButton.Size = new System.Drawing.Size(84, 29);
             this.clearButton.TabIndex = 36;
+            this.clearButton.TabStop = false;
             this.clearButton.Text = "C";
             this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            this.clearButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.clearButton_Click);
+            this.clearButton.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             // 
             // textLeft
             // 
             this.textLeft.Font = new System.Drawing.Font("MS UI Gothic", 15F);
-            this.textLeft.Location = new System.Drawing.Point(115, 19);
-            this.textLeft.Margin = new System.Windows.Forms.Padding(4);
+            this.textLeft.Location = new System.Drawing.Point(153, 24);
+            this.textLeft.Margin = new System.Windows.Forms.Padding(5);
             this.textLeft.Name = "textLeft";
             this.textLeft.ReadOnly = true;
-            this.textLeft.Size = new System.Drawing.Size(98, 27);
+            this.textLeft.Size = new System.Drawing.Size(129, 32);
             this.textLeft.TabIndex = 37;
+            this.textLeft.TabStop = false;
             this.textLeft.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textEnzanshi
             // 
             this.textEnzanshi.Font = new System.Drawing.Font("MS UI Gothic", 15F);
-            this.textEnzanshi.Location = new System.Drawing.Point(221, 19);
-            this.textEnzanshi.Margin = new System.Windows.Forms.Padding(4);
+            this.textEnzanshi.Location = new System.Drawing.Point(295, 24);
+            this.textEnzanshi.Margin = new System.Windows.Forms.Padding(5);
             this.textEnzanshi.Name = "textEnzanshi";
             this.textEnzanshi.ReadOnly = true;
-            this.textEnzanshi.Size = new System.Drawing.Size(55, 27);
+            this.textEnzanshi.Size = new System.Drawing.Size(72, 32);
             this.textEnzanshi.TabIndex = 39;
+            this.textEnzanshi.TabStop = false;
             this.textEnzanshi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textRight
             // 
             this.textRight.Font = new System.Drawing.Font("MS UI Gothic", 15F);
-            this.textRight.Location = new System.Drawing.Point(284, 19);
-            this.textRight.Margin = new System.Windows.Forms.Padding(4);
+            this.textRight.Location = new System.Drawing.Point(379, 24);
+            this.textRight.Margin = new System.Windows.Forms.Padding(5);
             this.textRight.Name = "textRight";
             this.textRight.ReadOnly = true;
-            this.textRight.Size = new System.Drawing.Size(98, 27);
+            this.textRight.Size = new System.Drawing.Size(129, 32);
             this.textRight.TabIndex = 40;
+            this.textRight.TabStop = false;
             this.textRight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 362);
+            this.ClientSize = new System.Drawing.Size(573, 452);
             this.Controls.Add(this.textRight);
             this.Controls.Add(this.textEnzanshi);
             this.Controls.Add(this.textLeft);
@@ -480,11 +581,13 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "関数電卓";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
