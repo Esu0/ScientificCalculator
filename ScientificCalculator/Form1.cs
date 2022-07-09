@@ -36,18 +36,24 @@ namespace ScientificCalculator
 
         void NumberMem(bool a) // 演算子で使うとき引数true
         {
-            if (a)
+            if (Operate == Operations.Noop)
             {
                 textRight.Text = "";
-                textLeft.Text = valueLeft.ToString();
+                textLeft.Text = "";
             }
             else
             {
-                if (Operate != Operations.Noop)
+                if (a)
+                {
+                    textRight.Text = "";
+                    textLeft.Text = valueLeft.ToString();
+                }
+                else
+                {
                     textRight.Text = valueRight.ToString();
-                textLeft.Text = valueLeft.ToString();
+                    textLeft.Text = valueLeft.ToString();
+                }
             }
-
         }
 
 
@@ -103,19 +109,19 @@ namespace ScientificCalculator
 
         private void singleOperator(string op, bool right = true)
         {
-            InOutNumber = valueLeft;
             textEnzanshi.Text = op;
+            Operate = Operations.Noop;
             if (right)
             {
-                textRight.Text = valueLeft.ToString();
+                textRight.Text = InOutNumber.ToString();
                 textLeft.Text = "";
             }
             else
             {
-                textLeft.Text = valueLeft.ToString();
+                textLeft.Text = InOutNumber.ToString();
                 textRight.Text = "";
             }
-            
+            InOutNumber = valueLeft;
         }
         /*演算子のボタンを押したとき*/
         private void button14_Click(object sender, MouseEventArgs e)
