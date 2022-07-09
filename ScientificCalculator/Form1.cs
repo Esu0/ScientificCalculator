@@ -12,7 +12,6 @@ namespace ScientificCalculator
 {
     public partial class Form1 : Form
     {
-        delegate double OneValFunc(double val);
         delegate double TwoValFunc(double val1, double val2);
 
         //public double total = 0;
@@ -37,36 +36,43 @@ namespace ScientificCalculator
 
         void NumberMem(bool a) // 演算子で使うとき引数true
         {
-            if (a)
+            if (Operate == Operations.Noop)
             {
                 textRight.Text = "";
-                textLeft.Text = valueLeft.ToString();
+                textLeft.Text = "";
             }
             else
             {
-                textRight.Text = valueRight.ToString();
-                textLeft.Text = valueLeft.ToString();
-
+                if (a)
+                {
+                    textRight.Text = "";
+                    textLeft.Text = valueLeft.ToString();
+                }
+                else
+                {
+                    textRight.Text = valueRight.ToString();
+                    textLeft.Text = valueLeft.ToString();
+                }
             }
-
         }
 
 
         public Form1()
         {
             InitializeComponent();
-            
         }
 
 
         string enzanshi1;   //演算子記憶用の変数
         double valueLeft = 0;   //演算子の左側の数字==内部変数1
         double valueRight = 0;  //演算子の右側の数字==内部変数2
-        double angle;   //ラジアンの値を格納する変数
 
         TwoValFunc Operate = Operations.Noop;
         bool OperatorSettingFlag = true;
         bool InputReset = false;
+
+#pragma warning disable IDE1006 //名づけ違反のメッセージを抑制
+
         private void enzanshinyuuryoku()    //演算子の入力がどのようなものか判定
         {
             valueLeft = InOutNumber;    //内部変数に格納
@@ -100,14 +106,23 @@ namespace ScientificCalculator
             }
             */
         }
-        private void enzan2()   //演算子二回目以降の入力の時
+
+        private void singleOperator(string op, bool right = true)
         {
-            //もともとの演算を適用
-            InOutNumber = Operate(valueLeft, valueRight);
-            valueLeft = InOutNumber;
+            textEnzanshi.Text = op;
+            Operate = Operations.Noop;
+            if (right)
+            {
+                textRight.Text = InOutNumber.ToString();
+                textLeft.Text = "";
+            }
+            else
+            {
+                textLeft.Text = InOutNumber.ToString();
+                textRight.Text = "";
+            }
+            InOutNumber = valueLeft;
         }
-
-
         /*演算子のボタンを押したとき*/
         private void button14_Click(object sender, MouseEventArgs e)
         {
@@ -127,11 +142,6 @@ namespace ScientificCalculator
             textEnzanshi.Text = "+";
 
             NumberMem(true);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void minusButton_Click(object sender, MouseEventArgs e)
@@ -164,10 +174,9 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            angle = Math.PI * InOutNumber / 180;  //ラジアンに直す
+            double angle = Math.PI * InOutNumber / 180;  //ラジアンに直す
             valueLeft = Math.Sin(angle);
-            InOutNumber = valueLeft;
-            textEnzanshi.Text = "sin";
+            singleOperator("sin");
         }
 
         private void cosButton_Click(object sender, MouseEventArgs e)
@@ -176,10 +185,9 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            angle = Math.PI * valueLeft / 180;  //ラジアンに直す
+            double angle = Math.PI * valueLeft / 180;  //ラジアンに直す
             valueLeft = Math.Cos(angle);
-            InOutNumber = valueLeft;
-            textEnzanshi.Text = "cos";
+            singleOperator("cos");
         }
 
         private void tanButton_Click(object sender, MouseEventArgs e)
@@ -188,10 +196,9 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            angle = Math.PI * valueLeft / 180;  //ラジアンに直す
+            double angle = Math.PI * valueLeft / 180;  //ラジアンに直す
             valueLeft = Math.Tan(angle);
-            InOutNumber = valueLeft;
-            textEnzanshi.Text = "tan";
+            singleOperator("tan");
         }
 
         private void logButton_Click(object sender, MouseEventArgs e)
@@ -201,8 +208,7 @@ namespace ScientificCalculator
 
             //入力されてる値に演算を適用する
             valueLeft = Math.Log10(valueLeft);  //入力値の常用対数(底10)を計算
-            InOutNumber = valueLeft;
-            textEnzanshi.Text = "log";
+            singleOperator("log");
         }
 
         private void arcsinButton_Click(object sender, MouseEventArgs e)
@@ -211,10 +217,9 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            angle = Math.Asin(valueLeft);
+            double angle = Math.Asin(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            InOutNumber = valueLeft;
-            textEnzanshi.Text = "arcsin";
+            singleOperator("arcsin");
         }
 
         private void arccosButton_Click(object sender, MouseEventArgs e)
@@ -223,10 +228,9 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            angle = Math.Acos(valueLeft);
+            double angle = Math.Acos(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            InOutNumber = valueLeft;
-            textEnzanshi.Text = "arccos";
+            singleOperator("arccos");
         }
 
         private void arctanButton_Click(object sender, MouseEventArgs e)
@@ -235,10 +239,9 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            angle = Math.Atan(valueLeft);
+            double angle = Math.Atan(valueLeft);
             valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            InOutNumber = valueLeft;
-            textEnzanshi.Text = "arctan";
+            singleOperator("arctan");
         }
 
         private void expButton_Click(object sender, MouseEventArgs e)
@@ -248,9 +251,8 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            valueLeft = Math.Exp(valueLeft);  //入力値の常用対数(底10)を計算
-            textBox1.Text = valueLeft.ToString();
-            textEnzanshi.Text = "exp";
+            valueLeft = Math.Exp(valueLeft);
+            singleOperator("exp");
         }
 
         private void powButton1_Click(object sender, MouseEventArgs e)
@@ -260,9 +262,8 @@ namespace ScientificCalculator
             enzanshinyuuryoku();
 
             //入力されてる値に演算を適用する
-            valueLeft = Math.Pow(valueLeft, 2);  //入力値の常用対数(底10)を計算
-            textBox1.Text = valueLeft.ToString();
-            textEnzanshi.Text = "^";
+            valueLeft = Math.Pow(valueLeft, 2);
+            singleOperator("^2", false);
         }
 
         /*数字のボタンを押したとき*/
@@ -464,7 +465,7 @@ namespace ScientificCalculator
                 textBox1.Text = "";
                 InputReset = false;
             }
-            textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1, 1);
+            if (textBox1.Text != "") textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1, 1);
             if (textBox1.Text == "-") UpdateTotal(0, "-");
             if (textBox1.Text == "") InOutNumber = 0;
             else if (textBox1.Text.LastOrDefault() != '.')
@@ -593,6 +594,7 @@ namespace ScientificCalculator
             valueLeft = InOutNumber;
         }
 
+#pragma warning restore IDE1006
         private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) jikkouButton_Click(null, null);
