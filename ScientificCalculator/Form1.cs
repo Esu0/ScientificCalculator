@@ -123,158 +123,271 @@ namespace ScientificCalculator
             }
             InOutNumber = valueLeft;
         }
+
+        private void UnexpectedError(Exception ex)
+        {
+            DialogResult result = MessageBox.Show(ex.Message, "Unexpected Error", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+            if (result == DialogResult.Abort)
+            {
+                Application.Exit();
+            }
+            else if (result == DialogResult.Retry)
+            {
+                Application.Restart();
+            }
+        }
+
         /*演算子のボタンを押したとき*/
         private void button14_Click(object sender, MouseEventArgs e)
         {
+            try
+            {
+                enzanshi1 = "*";    //入力された演算子を格納
+                enzanshinyuuryoku();    //演算子の入力がどのようなものか判定
+                textEnzanshi.Text = "*";
 
-            enzanshi1 = "*";    //入力された演算子を格納
-            enzanshinyuuryoku();    //演算子の入力がどのようなものか判定
-            textEnzanshi.Text = "*";
-
-            NumberMem(true);
+                NumberMem(true);
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void plusButton_Click(object sender, MouseEventArgs e)
         {
+            try
+            {
+                enzanshi1 = "+";
+                enzanshinyuuryoku();
+                textEnzanshi.Text = "+";
 
-            enzanshi1 = "+";
-            enzanshinyuuryoku();
-            textEnzanshi.Text = "+";
-
-            NumberMem(true);
+                NumberMem(true);
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void minusButton_Click(object sender, MouseEventArgs e)
         {
+            try
+            {
+                enzanshi1 = "-";
+                enzanshinyuuryoku();
+                textEnzanshi.Text = "-";
 
-            enzanshi1 = "-";
-            enzanshinyuuryoku();
-            textEnzanshi.Text = "-";
-
-            NumberMem(true);
+                NumberMem(true);
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void divideButton_Click(object sender, MouseEventArgs e)
         {
-            enzanshi1 = "/";
-            enzanshinyuuryoku();
-            textEnzanshi.Text = "/";
+            try
+            {
+                enzanshi1 = "/";
+                enzanshinyuuryoku();
+                textEnzanshi.Text = "/";
 
-            NumberMem(true);
+                NumberMem(true);
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
         // 初期化ボタンを押したとき
         private void clearButton_Click(object sender, MouseEventArgs e)
         {
-            ResetAll();
+            try
+            {
+                ResetAll();
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void sinButton_Click(object sender, MouseEventArgs e)
         {
-            enzanshi1 = "one";
-            enzanshinyuuryoku();
+            try
+            {
+                enzanshi1 = "one";
+                enzanshinyuuryoku();
 
-            //入力されてる値に演算を適用する
-            double angle = Math.PI * InOutNumber / 180;  //ラジアンに直す
-            valueLeft = Math.Sin(angle);
-            singleOperator("sin");
+                //入力されてる値に演算を適用する
+                double angle = Math.PI * InOutNumber / 180;  //ラジアンに直す
+                valueLeft = Math.Sin(angle);
+                singleOperator("sin");
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void cosButton_Click(object sender, MouseEventArgs e)
         {
-            enzanshi1 = "one";
-            enzanshinyuuryoku();
+            try
+            {
+                enzanshi1 = "one";
+                enzanshinyuuryoku();
 
-            //入力されてる値に演算を適用する
-            double angle = Math.PI * valueLeft / 180;  //ラジアンに直す
-            valueLeft = Math.Cos(angle);
-            singleOperator("cos");
+                //入力されてる値に演算を適用する
+                double angle = Math.PI * valueLeft / 180;  //ラジアンに直す
+                valueLeft = Math.Cos(angle);
+                singleOperator("cos");
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void tanButton_Click(object sender, MouseEventArgs e)
         {
-            enzanshi1 = "one";
-            enzanshinyuuryoku();
+            try
+            {
+                enzanshi1 = "one";
+                enzanshinyuuryoku();
 
-            //入力されてる値に演算を適用する
-            double angle = Math.PI * valueLeft / 180;  //ラジアンに直す
-            valueLeft = Math.Tan(angle);
-            singleOperator("tan");
+                //入力されてる値に演算を適用する
+                double angle = Math.PI * valueLeft / 180;  //ラジアンに直す
+                valueLeft = Math.Tan(angle);
+                singleOperator("tan");
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void logButton_Click(object sender, MouseEventArgs e)
         {
-            enzanshi1 = "one";
-            enzanshinyuuryoku();
+            try
+            {
+                enzanshi1 = "one";
+                enzanshinyuuryoku();
 
-            //入力されてる値に演算を適用する
-            valueLeft = Math.Log10(valueLeft);  //入力値の常用対数(底10)を計算
-            singleOperator("log");
+                //入力されてる値に演算を適用する
+                valueLeft = Math.Log10(valueLeft);  //入力値の常用対数(底10)を計算
+                singleOperator("log");
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void arcsinButton_Click(object sender, MouseEventArgs e)
         {
-            enzanshi1 = "one";
-            enzanshinyuuryoku();
+            try
+            {
+                enzanshi1 = "one";
+                enzanshinyuuryoku();
 
-            //入力されてる値に演算を適用する
-            double angle = Math.Asin(valueLeft);
-            valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            singleOperator("arcsin");
+                //入力されてる値に演算を適用する
+                double angle = Math.Asin(valueLeft);
+                valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
+                singleOperator("arcsin");
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void arccosButton_Click(object sender, MouseEventArgs e)
         {
-            enzanshi1 = "one";
-            enzanshinyuuryoku();
+            try
+            {
+                enzanshi1 = "one";
+                enzanshinyuuryoku();
 
-            //入力されてる値に演算を適用する
-            double angle = Math.Acos(valueLeft);
-            valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            singleOperator("arccos");
+                //入力されてる値に演算を適用する
+                double angle = Math.Acos(valueLeft);
+                valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
+                singleOperator("arccos");
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void arctanButton_Click(object sender, MouseEventArgs e)
         {
-            enzanshi1 = "one";
-            enzanshinyuuryoku();
+            try
+            {
+                enzanshi1 = "one";
+                enzanshinyuuryoku();
 
-            //入力されてる値に演算を適用する
-            double angle = Math.Atan(valueLeft);
-            valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
-            singleOperator("arctan");
+                //入力されてる値に演算を適用する
+                double angle = Math.Atan(valueLeft);
+                valueLeft = angle * 180 / Math.PI;  //ラジアンに直す
+                singleOperator("arctan");
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void expButton_Click(object sender, MouseEventArgs e)
         {
+            try
+            {
+                enzanshi1 = "one";
+                enzanshinyuuryoku();
 
-            enzanshi1 = "one";
-            enzanshinyuuryoku();
-
-            //入力されてる値に演算を適用する
-            valueLeft = Math.Exp(valueLeft);
-            singleOperator("exp");
+                //入力されてる値に演算を適用する
+                valueLeft = Math.Exp(valueLeft);
+                singleOperator("exp");
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void powButton1_Click(object sender, MouseEventArgs e)
         {
+            try
+            {
+                enzanshi1 = "one";
+                enzanshinyuuryoku();
 
-            enzanshi1 = "one";
-            enzanshinyuuryoku();
-
-            //入力されてる値に演算を適用する
-            valueLeft = Math.Pow(valueLeft, 2);
-            singleOperator("^2", false);
+                //入力されてる値に演算を適用する
+                valueLeft = Math.Pow(valueLeft, 2);
+                singleOperator("^2", false);
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         /*数字のボタンを押したとき*/
         private void powButton2_Click(object sender, MouseEventArgs e)
         {
+            try
+            {
+                enzanshi1 = "x^y";
+                enzanshinyuuryoku();
+                textEnzanshi.Text = "^";
 
-            enzanshi1 = "x^y";
-            enzanshinyuuryoku();
-            textEnzanshi.Text = "^";
-
-            NumberMem(true);
+                NumberMem(true);
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private TwoValFunc SelectOperator(string op)
@@ -467,7 +580,7 @@ namespace ScientificCalculator
             }
             if (textBox1.Text != "") textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1, 1);
             if (textBox1.Text == "-") UpdateTotal(0, "-");
-            if (textBox1.Text == "") InOutNumber = 0;
+            else if (textBox1.Text == "") InOutNumber = 0;
             else if (textBox1.Text.LastOrDefault() != '.')
             {
                 if (double.TryParse(textBox1.Text, out double value))
@@ -513,91 +626,119 @@ namespace ScientificCalculator
         //押されたキー判定と入力された数字を保存
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            char add_char;
-            switch (e.KeyData)
+            try
             {
-                case Keys.D0:
-                    add_char = '0';
-                    break;
-                case Keys.D1:
-                    add_char = '1';
-                    break;
-                case Keys.D2:
-                    add_char = '2';
-                    break;
-                case Keys.D3:
-                    add_char = '3';
-                    break;
-                case Keys.D4:
-                    add_char = '4';
-                    break;
-                case Keys.D5:
-                    add_char = '5';
-                    break;
-                case Keys.D6:
-                    add_char = '6';
-                    break;
-                case Keys.D7:
-                    add_char = '7';
-                    break;
-                case Keys.D8:
-                    add_char = '8';
-                    break;
-                case Keys.D9:
-                    add_char = '9';
-                    break;
-                case Keys.Back:
-                    add_char = 'r';
-                    break;
-                case Keys.Decimal:
-                    add_char = '.';
-                    break;
-                case Keys.Delete:
-                    add_char = 'd';
-                    break;
-                case Keys.Escape:
-                    ResetAll();
-                    add_char = '\0';
-                    break;
-                default:
-                    add_char = '\0';
-                    break;
+                char add_char;
+                switch (e.KeyData)
+                {
+                    case Keys.D0:
+                        add_char = '0';
+                        break;
+                    case Keys.D1:
+                        add_char = '1';
+                        break;
+                    case Keys.D2:
+                        add_char = '2';
+                        break;
+                    case Keys.D3:
+                        add_char = '3';
+                        break;
+                    case Keys.D4:
+                        add_char = '4';
+                        break;
+                    case Keys.D5:
+                        add_char = '5';
+                        break;
+                    case Keys.D6:
+                        add_char = '6';
+                        break;
+                    case Keys.D7:
+                        add_char = '7';
+                        break;
+                    case Keys.D8:
+                        add_char = '8';
+                        break;
+                    case Keys.D9:
+                        add_char = '9';
+                        break;
+                    case Keys.Back:
+                        add_char = 'r';
+                        break;
+                    case Keys.Decimal:
+                        add_char = '.';
+                        break;
+                    case Keys.Delete:
+                        add_char = 'd';
+                        break;
+                    case Keys.Escape:
+                        ResetAll();
+                        add_char = '\0';
+                        break;
+                    default:
+                        add_char = '\0';
+                        break;
+                }
+                if (add_char == 'r') DeleteOne();
+                else if (add_char == 'd') DeleteAll();
+                else if (add_char != '\0')
+                {
+                    InputDigit(add_char);
+                }
             }
-            if (add_char == 'r') DeleteOne();
-            else if (add_char == 'd') DeleteAll();
-            else if (add_char != '\0')
+            catch (Exception ex)
             {
-                InputDigit(add_char);
+                UnexpectedError(ex);
             }
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == '.') InputDot();
-            else if (e.KeyChar == '-') InputMinus();
-            else if (e.KeyChar == '+') plusButton_Click(null, null);
-            else if (e.KeyChar == '*') button14_Click(null, null);
-            else if (e.KeyChar == '/') divideButton_Click(null, null);
-            else if (e.KeyChar == '^') powButton2_Click(null, null);
+            try
+            {
+                if (e.KeyChar == '.') InputDot();
+                else if (e.KeyChar == '-') InputMinus();
+                else if (e.KeyChar == '+') plusButton_Click(null, null);
+                else if (e.KeyChar == '*') button14_Click(null, null);
+                else if (e.KeyChar == '/') divideButton_Click(null, null);
+                else if (e.KeyChar == '^') powButton2_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
         private void jikkouButton_Click(object sender, EventArgs e)
         {
-            if (OperatorSettingFlag) valueRight = InOutNumber; //2つめの値を内部変数に格納
-            OperatorSettingFlag = false;
+            try
+            {
+                if (OperatorSettingFlag) valueRight = InOutNumber; //2つめの値を内部変数に格納
+                OperatorSettingFlag = false;
 
 
-            NumberMem(false);
+                NumberMem(false);
 
-            //演算子の判定と計算を行う
-            InOutNumber = Operate(valueLeft, valueRight);
-            valueLeft = InOutNumber;
+                //演算子の判定と計算を行う
+                InOutNumber = Operate(valueLeft, valueRight);
+                valueLeft = InOutNumber;
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
 
 #pragma warning restore IDE1006
         private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) jikkouButton_Click(null, null);
+            try
+            {
+                if (e.KeyCode == Keys.Enter) jikkouButton_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                UnexpectedError(ex);
+            }
         }
     }
 }
